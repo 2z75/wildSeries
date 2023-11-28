@@ -3,8 +3,8 @@
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ProgramController extends AbstractController
 {
@@ -15,4 +15,13 @@ class ProgramController extends AbstractController
             'website' => 'Wild Series',
         ]);
     }
+
+    #[Route('/program/{id<\d+>}', methods: ['GET'], name: 'program_show')]
+    public function show(): Response
+    {
+        // ...
+        return $this->render('program/show.html.twig', ['id' => 4 ]);
+    }
+
+
 }
