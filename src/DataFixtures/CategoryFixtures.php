@@ -9,11 +9,11 @@ use Doctrine\Persistence\ObjectManager;
 class CategoryFixtures extends Fixture
 {
     const CATEGORIES = [
-        'Action',
-        'Aventure',
-        'Animation',
-        'Fantastique',
-        'Horreur',
+        'action',
+        'aventure',
+        'animation',
+        'fantastique',
+        'horreur',
     ];
     public function load(ObjectManager $manager)
     {

@@ -1,5 +1,6 @@
 <?php
 namespace App\DataFixtures;
+
 use App\Entity\Program;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
@@ -7,11 +8,11 @@ use Doctrine\Persistence\ObjectManager;
 class ProgramFixtures extends Fixture implements DependentFixtureInterface
 {
     public const PROGRAMS = [
-        ['title' => 'Program 1', 'synopsis' => 'Synopsis 1'],
-        ['title' => 'Program 2', 'synopsis' => 'Synopsis 2'],
-        ['title' => 'Program 3', 'synopsis' => 'Synopsis 3'],
-        ['title' => 'Program 4', 'synopsis' => 'Synopsis 4'],
-        ['title' => 'Program 5', 'synopsis' => 'Synopsis 5'],
+        ['title' => 'The Wire', 'synopsis' => "La meilleure série de l'histoire"],
+        ['title' => 'Oz', 'synopsis' => "Un reportage sur les prisons"],
+        ['title' => 'Vikings', 'synopsis' => "Yvaaaaaaar"],
+        ['title' => 'The Shield', 'synopsis' => "Enfin un bon policier"],
+        ['title' => 'GOT', 'synopsis' => "Mouais"],
     ];
     public function load(ObjectManager $manager)
     {
@@ -19,7 +20,8 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
             $program = new Program();
             $program->setTitle($programData['title']);
             $program->setSynopsis($programData['synopsis']);
-            $program->setCategory($this->getReference('category_Action'));
+            $program->setPoster('Bonjour');
+            $program->setCategory($this->getReference('category_action'));
             $manager->persist($program);
         }
         $manager->flush();
@@ -30,5 +32,7 @@ class ProgramFixtures extends Fixture implements DependentFixtureInterface
         CategoryFixtures::class,
         ];
     }
+
+    
 }
 
