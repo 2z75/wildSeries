@@ -24,7 +24,7 @@ class ProgramController extends AbstractController
     #[Route('/show/{id<^[0-9]+$>}', name: 'show')]
 public function show(int $id, ProgramRepository $programRepository):Response
 {
-    $program = $programRepository->findOneById($id);
+    $program = $programRepository->find($id);
 
 
     if (!$program) {
@@ -33,9 +33,17 @@ public function show(int $id, ProgramRepository $programRepository):Response
         );
     }
     return $this->render('program/show.html.twig', [
-        'program' => $program,
+        'program' => $program
     ]);
 }
 
+    #[Route("/program/{programId}/season/{seasonId}", name: "show_season")]
+public function showSeason(int $id, ProgramRepository $programId, ProgramRepository $seasonId): Response
+{
+    $programSeason = $programId->find($id);
+    $season = $seasonId->find($id);
+
+    return $this->render('program/season_show.html.twig', ["programSeason" => $programSeason, 'season' => $season]);
+}
 
 }
