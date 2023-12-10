@@ -5,8 +5,12 @@ namespace App\Entity;
 use App\Repository\EpisodeRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+
 
 #[ORM\Entity(repositoryClass: EpisodeRepository::class)]
+#[UniqueEntity('title')]
 class Episode
 {
     #[ORM\Id]
@@ -14,13 +18,19 @@ class Episode
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(type: 'string', length: 255)]
+    #[Assert\NotBlank(message: "chakal remplis bien aussi")]
+    #[Assert\Length(
+        max: 255,
+        maxMessage:"La categorie saisie {{ value }} est trop longue, elle doit faire max {{ limit }} caractères",
+        )]
     private ?string $title = null;
 
     #[ORM\Column]
     private ?int $number = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Assert\NotBlank(message:"Le champ ne peut pas être vide")]
     private ?string $synopsis = null;
 
     #[ORM\ManyToOne(inversedBy: 'episodes')]

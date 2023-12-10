@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+{% block title %} <h1>{{ program.title }} - season {{ season.number }}</h1> {% endblock %}
+
+{% block body %}
+{% for episode in episodes %}
+<tr>
+    <td>{{ episode.id }}</td>
+    <td>{{ episode.title }}</td>
+    <td>{{ episode.slug }}</td>
+    <td>{{ episode.number }}</td>
+    <td>{{ episode.synopsis }}</td>
+    <td>
+        <a class="btn btn-primary"  href="{{ path('episode_show', {'slug': episode.slug}) }}">Show</a>
+    </td>
+</tr>
+{% else %}
+<tr>
+    <td colspan="5">no records found</td>
+</tr>
+{% endfor %}
+{% endblock %}
